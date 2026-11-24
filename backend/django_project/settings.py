@@ -48,7 +48,7 @@ CORS_ORIGIN_WHITELIST = (
     
 )
 CORS_ALLOWED_ORIGINS=[
-    'https://book-drab-three.vercel.app/'
+    'https://book-drab-three.vercel.app'
 ]
 ALLOWED_HOSTS = [
     "book-syuz.onrender.com",
