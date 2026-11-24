@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:5173',
     'http://localhost:127.0.0.1:8000',
+    'https://book-drab-three.vercel.app/',
 )
 
 ALLOWED_HOSTS = [
