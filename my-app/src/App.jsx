@@ -1,0 +1,76 @@
+import { Toaster } from "@/components/ui/toaster"
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClientInstance } from '@/lib/query-client'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import PageNotFound from './lib/PageNotFound';
+import { AuthProvider, useAuth } from '@/lib/AuthContext';
+import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import ScrollToTop from './components/ScrollToTop';
+import Layout from './components/Layout';
+import Home from './pages/Home';
+import About from './pages/About';
+import Services from './pages/Services';
+import Booking from './pages/Booking';
+import LocationSection from "./pages/LocationSection";
+import BeforeAfter from './pages/beforeafter';
+import Success from './pages/orderSuccess';
+import Cancel from './pages/cancel';
+
+const AuthenticatedApp = () => {
+  const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
+
+  if (isLoadingPublicSettings || isLoadingAuth) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-[#FAF9F7]">
+        <div className="w-8 h-8 border-4 border-[#DDD6CE] border-t-[#2CBFAE] rounded-full animate-spin">
+        
+        </div>
+      </div>
+    );
+  }
+
+  if (authError) {
+    if (authError.type === 'user_not_registered') {
+      return <UserNotRegisteredError />;
+    } else if (authError.type === 'auth_required') {
+      navigateToLogin();
+      return null;
+    }
+  }
+
+  return (
+  <>
+    <Routes>
+   
+      <Route element={<Layout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/booking" element={<Booking />} />
+          <Route path="/location" element={<LocationSection />} />
+          <Route path="/beforeafter" element={<BeforeAfter/>}/>
+          <Route path="/ordersuccess/:pk" element ={<Success/>}/>
+          <Route path="/cancel" element={<Cancel/>}/>
+      </Route>
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
+    </>
+  );
+};
+
+
+function App() {
+  return (
+    <AuthProvider>
+      <QueryClientProvider client={queryClientInstance}>
+        <Router>
+          <ScrollToTop />
+          <AuthenticatedApp />
+        </Router>
+        <Toaster />
+      </QueryClientProvider>
+    </AuthProvider>
+  )
+}
+
+export default App
