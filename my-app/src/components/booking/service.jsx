@@ -3,9 +3,10 @@ import axios from "axios";
 export default function ServiceForm({value, onChange}) {
 
 const[list, setList] = useState([]);
+const API_URL = import.meta.env.VITE_API_URL;
 useEffect(()=>{
 axios.
-get('http://127.0.0.1:8000/api/')
+get(`${API_URL}/api/`)
 .then((response)=>{
   setList(response.data);
 
