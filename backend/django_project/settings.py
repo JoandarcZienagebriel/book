@@ -47,6 +47,9 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:127.0.0.1:8000',
 )
 
+ALLOWED_HOSTS = [
+    "https://book-syuz.onrender.com",
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
