@@ -49,7 +49,7 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 ALLOWED_HOSTS = [
-    "https://book-syuz.onrender.com",
+    "book-syuz.onrender.com",
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
