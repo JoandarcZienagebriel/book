@@ -7,8 +7,9 @@ export default function OrderSuccess(){
    const[appointment, setAppointment] = useState(null);
    const navigate=useNavigate()
 const {pk}= useParams();
+const API_URL = import.meta.env.VITE_API_URL;
 useEffect(()=>{
-         axios.get(`http://127.0.0.1:8000/api/book/${pk}`)
+         axios.get(`${API_URL}/api/book/${pk}`)
          .then((response)=>{
           console.log('data received:', response.data)
           setAppointment(response.data)
@@ -24,7 +25,7 @@ useEffect(()=>{
 const deleteBooking = async () => {
   try {
     await axios.delete(
-      `http://127.0.0.1:8000/api/book/${pk}/`
+      `${API_URL}/api/book/${pk}/`
     );
     navigate('/cancel')
   } catch (error) {
